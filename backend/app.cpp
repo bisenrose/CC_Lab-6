@@ -42,6 +42,10 @@ int main() {
         int client_fd = accept(server_fd, NULL, NULL);
         if (client_fd < 0) continue;
         
+        // Read the request first
+        char buffer[1024] = {0};
+        read(client_fd, buffer, 1024);
+        
         // Simple HTTP response
         std::string response = "HTTP/1.1 200 OK\r\n";
         response += "Content-Type: text/plain\r\n";
